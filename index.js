@@ -59,9 +59,22 @@ app.get('/api/getStudents', function (req, res) {
 })
 
 /**Delete student */
-app.delete('/api/deleteStudent/:id', function (req, res) {
-  student.splice(req.params.id, 1);
-  res.json(`${req.params.id} deleted sucessfully `);
+app.delete('/api/deleteStudent/:studentName', function (req, res) {
+  let i = 0;
+  let j = 0;
+  let studentTemp = [];
+  for (i in student) {
+    if (student[i].studentName != req.params.studentName) {
+      studentTemp[j] = student[i];
+      j=j+1;
+    }
+  }
+  student = studentTemp;
+  console.log("---------");
+  console.log(studentTemp);
+  console.log("-----............----");
+  console.log(student);
+  res.json(`${req.params.studentName} deleted sucessfully `);
 })
 
 app.listen(3001, function () {
